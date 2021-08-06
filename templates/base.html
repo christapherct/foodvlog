@@ -1,0 +1,61 @@
+{% load static %}
+
+<html lang="">
+<head>
+  <title>Grab Tastes</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="shortcut icon" href="{% static 'hm/images/demo/backgrounds/icon.png' %}">
+  <link href={% static "hm/layout/styles/layout.css" %} rel="stylesheet" type="text/css" media="all">
+</head>
+<body id="top">
+
+<!-- Top Background Image Wrapper -->
+<div class="bgded overlay" style="background-image:url({% static 'hm/images/demo/backgrounds/main.jpg' %});" >
+  <div class="wrapper row0">
+    <div id="topbar" class="hoc clear">
+      <div class="fl_right">
+        <ul class="nospace">
+          <li id="searchform">
+            <div>
+              <form action="{% url 'search' %}" method="get">
+                <fieldset>
+                  <legend>Quick Search:</legend>
+                  <input type="text" placeholder="Enter item to be search&hellip;" name="q">
+                  <button type="submit"><i class="fas fa-search"></i></button>
+                </fieldset>
+              </form>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrapper row1">
+    <header id="header" class="hoc clear">
+      <div id="logo" class="fl_left">
+        <h1 style="color:white"><a href="/">GRAB TASTES</a></h1>
+      </div>
+      <nav id="mainav" class="fl_right">
+        <ul class="clear">
+           {% if user.is_authenticated %}
+            <li>Hai {{user.username}}</li>
+            <li class="active"><a href="/">Home</a></li>
+            <li class="active"><a href="{% url 'cartDetails' %}">Cart<i class="fa fa-shopping-cart"style="font-size:28px"></i>&nbsp<b>{{itc}}</b></a></li>
+            <li class="active"><a href="{% url 'logout' %}">Logout</a></li>
+          {% else %}
+            <li class="active"><a href="/">Home</a></li>
+            <li class="active"><a href="{% url 'login' %}">Login</a></li>
+            <li class="active"><a href="{% url 'cartDetails' %}">Cart<i class="fa fa-shopping-cart"style="font-size:28px"></i>&nbsp<b>{{itc}}</b></a></li>
+          {% endif %}
+        </ul>
+      </nav>
+    </header>
+  </div>
+</div>
+
+{% block content %}
+{% endblock %}
+</body>
+</html>
